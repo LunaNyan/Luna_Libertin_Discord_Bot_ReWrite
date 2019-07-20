@@ -14,21 +14,25 @@ def if_author_is_admin(message):
     else:
         return False
 
-def change_presence(text):
-    client.change_presence(game=discord.Game(name=text))
+@client.event
+async def change_presence(text):
+    await client.change_presence(game=discord.Game(name=text))
 
-def say(message, text):
-    client.send_message(message.channel, text)
+@client.event
+async def say(message, text):
+    await client.send_message(message.channel, text)
 
-def say_somewhere(channel, text):
-    client.send_message(discord.Object(id=channel), text)
+@client.event
+async def say_somewhere(channel, text):
+    await client.send_message(discord.Object(id=channel), text)
 
-def delete_message(message):
-    client.delete_message(message)
+@client.event
+async def delete_message(message):
+    await client.delete_message(message)
 
 @client.event
 async def on_message(message):
-    main.on_message(message)
+    await main.on_message(message)
 
 @client.event
 async def on_message_delete(message):
@@ -36,7 +40,7 @@ async def on_message_delete(message):
         return
     elif message.author.bot:
         return
-    main.on_message_delete(message)
+#    main.on_message_delete(message)
 
 @client.event
 async def on_message_edit(before, after):
@@ -44,7 +48,7 @@ async def on_message_edit(before, after):
         return
     elif before.author.bot:
         return
-    main.on_message_edit(before, after)
+#    main.on_message_edit(before, after)
 
 
 client.run(m_conf.read("auth", "token"))
