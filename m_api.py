@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-import discord, asyncio, main, m_conf, m_log
+import discord, asyncio, luna_libertin_rewrite, m_conf, m_log
 
 client = discord.Client()
 
@@ -7,7 +7,7 @@ client = discord.Client()
 async def on_ready():
     m_log.info('name    : ' + str(client.user.name))
     m_log.info('id      : ' + str(client.user.id))
-    m_log.info('version : ' + main.bot_ver)
+    m_log.info('version : ' + luna_libertin_rewrite.bot_ver)
 
 def if_author_is_admin(message):
     if message.author.server_permissions.administrator:
@@ -45,7 +45,7 @@ async def delete_message(message):
 
 @client.event
 async def on_message(message):
-    await main.on_message(message)
+    await luna_libertin_rewrite.MessageReceived(message)
 
 try:
     token = m_conf.read("auth", "token")
@@ -54,7 +54,7 @@ try:
         m_warn("manually providing bot token.")
         token = input("input your bot token (leave empty to exit) : ")
         if token == '':
-            main.giveup("no token provided.")
+            luna_libertin_rewrite.giveup("no token provided.")
     client.run(token)
 except Exception as e:
-    main.giveup("failed to load bot : " + str(e))
+    luna_libertin_rewrite.giveup("failed to load bot : " + str(e))

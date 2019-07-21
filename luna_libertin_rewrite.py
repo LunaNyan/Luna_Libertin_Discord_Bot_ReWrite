@@ -2,10 +2,10 @@
 
 bot_ver = "0.0.1"
 
-import sys, m_log
+import sys, m_log, m_help, m_api, m_conf, discord, asyncio
 
 def giveup(text):
-    m_error("Giving Up. Reason : " + text)
+    m_log.error("Giving Up. Reason : " + text)
     sys.exit()
 
 if sys.version_info[0] != 3 or sys.version_info[1] < 5:
@@ -14,10 +14,7 @@ if sys.version_info[0] != 3 or sys.version_info[1] < 5:
 else:
     m_log.info("Machine's Python version is 3.5+.")
 
-import discord, asyncio
-import m_api, m_conf
-
-async def on_message(message):
+async def MessageReceived(message):
     if message.content.startswith("루냥아"):
         # parsing command
         message_t = message.content.replace("루냥아 ", '')
@@ -25,4 +22,8 @@ async def on_message(message):
         cmd = args[0]
         params = args[1:]
         # reacting to command
-        await m_api.say(message, "message_t : " + message_t + "\nargs : " + str(args) + "\ncmd : " + str(cmd) + "\nparams : " + str(params))
+        await m_api.say(message, 'success')
+#        if cmd == "도와줘":
+#            await m_api.say(message, embed=m_help.help(params))
+#        elif cmd == "업데이트내역":
+#            await m_api.say(message, embed=m_help.updatelog())
