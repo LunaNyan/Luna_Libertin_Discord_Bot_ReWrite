@@ -1,9 +1,14 @@
-import configparser
+import configparser, m_log
 
 filename = "config.ini" #example file name
 
 conf = configparser.ConfigParser()
-conf.read(filename)
+
+try:
+    conf.read(filename)
+    m_log.info("successfully loaded configuration file.")
+except Exception as e:
+    m_log.error("failed to load configuration file : " + str(e))
 
 def read(key, id):
     try:
@@ -18,5 +23,6 @@ def write(key, id, value):
         return True
     except:
         return False
+        m_log.error("failed to writing configuration file : " + str(e))
     with open(filename, 'w') as configfile:
         conf.write(configfile)

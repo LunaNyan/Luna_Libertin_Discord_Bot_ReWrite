@@ -1,12 +1,13 @@
 #!/usr/bin/python3
-import discord, asyncio, main, m_conf
+import discord, asyncio, main, m_conf, m_log
 
 client = discord.Client()
 
 @client.event
 async def on_ready():
-    print('name : ' + str(client.user.name))
-    print('id   : ' + str(client.user.id))
+    m_log.info('name    : ' + str(client.user.name))
+    m_log.info('id      : ' + str(client.user.id))
+    m_log.info('version : ' + main.bot_ver)
 
 def if_author_is_admin(message):
     if message.author.server_permissions.administrator:
@@ -16,39 +17,37 @@ def if_author_is_admin(message):
 
 @client.event
 async def change_presence(text):
-    await client.change_presence(game=discord.Game(name=text))
+    try:
+        await client.change_presence(game=discord.Game(name=text))
+    except Exception as e:
+        m_log.warn("failed to change persence : " + str(e))
 
 @client.event
 async def say(message, text):
-    await client.send_message(message.channel, text)
+    try:
+        await client.send_message(message.channel, text)
+    except Exception as e:
+        m_log.warn("failed to say : " + str(e))
 
 @client.event
 async def say_somewhere(channel, text):
-    await client.send_message(discord.Object(id=channel), text)
+    try:
+        await client.send_message(discord.Object(id=channel), text)
+    except Exception as e:
+        m_log.warn("failed to say somewhere : " + str(e))
 
 @client.event
 async def delete_message(message):
-    await client.delete_message(message)
+    try:
+        await client.delete_message(message)
+    except Exception as e:
+        m_log.warn("failed to delete message : " + str(e))
 
 @client.event
 async def on_message(message):
     await main.on_message(message)
 
-@client.event
-async def on_message_delete(message):
-    if message.author == client.user:
-        return
-    elif message.author.bot:
-        return
-#    main.on_message_delete(message)
-
-@client.event
-async def on_message_edit(before, after):
-    if before.author == client.user:
-        return
-    elif before.author.bot:
-        return
-#    main.on_message_edit(before, after)
-
-
-client.run(m_conf.read("auth", "token"))
+try:
+    client.run(m_conf.read("auth", "token"))
+except Exception as e:
+    m_log.error("failed to load bot : " + str(e))
