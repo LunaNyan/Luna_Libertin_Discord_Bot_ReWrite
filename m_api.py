@@ -48,6 +48,13 @@ async def on_message(message):
     await main.on_message(message)
 
 try:
-    client.run(m_conf.read("auth", "token"))
+    token = m_conf.read("auth", "token")
+    if token == '':
+        m_warn("no token provided in configuration file.")
+        m_warn("manually providing bot token.")
+        token = input("input your bot token (leave empty to exit) : ")
+        if token == '':
+            main.giveup("no token provided.")
+    client.run(token)
 except Exception as e:
-    m_log.error("failed to load bot : " + str(e))
+    main.giveup("failed to load bot : " + str(e))

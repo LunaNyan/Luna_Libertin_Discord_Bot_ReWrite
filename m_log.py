@@ -2,7 +2,7 @@ import datetime
 
 def writedown(text):
     with open("log.txt", "a") as f:
-        f.write(datetime.datetime.now() + text + "\n")
+        f.write(str(datetime.datetime.now()) + text + "\n")
 
 def error(text):
     writedown(" : E : " + text)

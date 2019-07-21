@@ -1,4 +1,4 @@
-import configparser, m_log
+import configparser, m_log, main
 
 filename = "config.ini" #example file name
 
@@ -8,7 +8,7 @@ try:
     conf.read(filename)
     m_log.info("successfully loaded configuration file.")
 except Exception as e:
-    m_log.error("failed to load configuration file : " + str(e))
+    main.giveup("failed to load configuration file : " + str(e))
 
 def read(key, id):
     try:
