@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-import discord, asyncio, luna_libertin_rewrite, m_conf, m_log
+import discord, asyncio, m_conf, m_log, luna_libertin_rewrite
 
 client = discord.Client()
 
 @client.event
 async def on_ready():
+    m_log.info('bot is ready.')
     m_log.info('name    : ' + str(client.user.name))
     m_log.info('id      : ' + str(client.user.id))
     m_log.info('version : ' + luna_libertin_rewrite.bot_ver)
@@ -50,8 +51,8 @@ async def on_message(message):
 try:
     token = m_conf.read("auth", "token")
     if token == '':
-        m_warn("no token provided in configuration file.")
-        m_warn("manually providing bot token.")
+        m_log.warn("no token provided in configuration file.")
+        m_log.warn("manually providing bot token.")
         token = input("input your bot token (leave empty to exit) : ")
         if token == '':
             luna_libertin_rewrite.giveup("no token provided.")
