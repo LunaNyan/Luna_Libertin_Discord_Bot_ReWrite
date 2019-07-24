@@ -21,7 +21,7 @@ def help(params):
             embed.add_field(name="와! 샌즈!", value=text, inline=False)
         elif params[0] == '게임':
             try:
-                elif params[1] == '섯다':
+                if params[1] == '섯다':
                     text = "명령어 : 루냥아 섯다 (숫자1) (숫자2), "
                     text+= "0~9까지의 숫자 두개를 입력해 진행합니다"
                     embed=discord.Embed(title="두장섯다 사용 방법", description=text, color=0xffff00)
