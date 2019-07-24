@@ -2,7 +2,7 @@ import discord, asyncio, m_log, m_version
 
 bot_ver = "2.0.0-t01"
 
-def help(params):
+def help(client, params):
     try:
         if params[0] == '일상':
             embed=discord.Embed(title="도움말", description="일상 항목", color=0x8080ff)

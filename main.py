@@ -19,7 +19,7 @@ async def on_message(message):
         params = args[1:]
         # reacting to command
         if cmd == "도와줘":
-            await say(message, embed=m_version.help(params))
+            await say(message, embed=m_version.help(client, params))
         elif cmd == "업데이트내역":
             await say(message, embed=m_version.updatelog())
 
