@@ -52,7 +52,7 @@ async def on_ready():
     m_log.info('version : ' + m_version.bot_ver)
 
 try:
-    token = m_conf.read("auth", "token")
+    token = m_conf.BOT_TOKEN
     if token == '':
         m_log.warn("no token provided in configuration file.")
         m_log.warn("manually providing bot token.")
