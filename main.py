@@ -12,16 +12,16 @@ client = discord.Client()
 @client.event
 async def on_message(message):
     if message.content.startswith("루냥아"):
-    # parsing command
-    message_t = content.replace("루냥아 ", '')
-    args = message_t.split(' ')
-    cmd = args[0]
-    params = args[1:]
-    # reacting to command
-    if cmd == "도와줘":
-        await say(message, embed=m_version.help(params))
-    elif cmd == "업데이트내역":
-        await say(message, embed=m_version.updatelog())
+        # parsing command
+        message_t = content.replace("루냥아 ", '')
+        args = message_t.split(' ')
+        cmd = args[0]
+        params = args[1:]
+        # reacting to command
+        if cmd == "도와줘":
+            await say(message, embed=m_version.help(params))
+        elif cmd == "업데이트내역":
+            await say(message, embed=m_version.updatelog())
 
 @client.event
 async def change_presence(text):
