@@ -1,4 +1,6 @@
-import discord, asyncio, m_log, luna_libertin_rewrite
+import discord, asyncio, m_log, m_version
+
+bot_ver = "2.0.0-t01"
 
 def help(params):
     if params[0] == '':
@@ -16,7 +18,7 @@ def help(params):
         text = "루냥아 계산해줘 (계산식), 루냥아 계산해줘 이미지 (계산식), "
         text+= "루냥아 확성기, 루냥아 골라줘"
         embed.add_field(name="유용한 기능", value=text, inline=False)
-        embed.set_footer(text="Copyright (C) 2017 - 2019 libertin | v" + luna_libertin_rewrite.bot_ver)
+        embed.set_footer(text="Copyright (C) 2017 - 2019 libertin | v" + m_version.bot_ver)
     elif params[0] == '일상':
         embed=discord.Embed(title="도움말", description="일상 항목", color=0x8080ff)
         text = "랜덤으로 음식을 추천해줍니다 (음식을 사주지는 않습니다!)"

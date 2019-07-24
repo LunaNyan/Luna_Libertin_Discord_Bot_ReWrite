@@ -1,4 +1,4 @@
-import configparser, m_log, luna_libertin_rewrite
+import configparser, m_log, main
 
 filename = "config.ini" #example file name
 
@@ -8,7 +8,7 @@ try:
     conf.read(filename)
     m_log.info("successfully loaded configuration file.")
 except Exception as e:
-    luna_libertin_rewrite.giveup("failed to load configuration file : " + str(e))
+    m_log.giveup("failed to load configuration file : " + str(e))
 
 def read(key, id):
     try:
