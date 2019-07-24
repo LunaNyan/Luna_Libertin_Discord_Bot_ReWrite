@@ -4,7 +4,7 @@ bot_ver = "2.0.0-t01"
 
 def help(params):
     try:
-        elif params[0] == '일상':
+        if params[0] == '일상':
             embed=discord.Embed(title="도움말", description="일상 항목", color=0x8080ff)
             text = "랜덤으로 음식을 추천해줍니다 (음식을 사주지는 않습니다!)"
             embed.add_field(name="루냥아 배고파", value=text, inline=False)
