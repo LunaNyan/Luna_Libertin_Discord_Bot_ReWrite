@@ -24,11 +24,15 @@ async def on_message(message):
             await say(message, embed=m_version.updatelog())
 
 @client.event
-async def change_presence(text):
-    try:
-        await client.change_presence(game=discord.Game(name=text))
-    except Exception as e:
-        m_log.warn("failed to change persence : " + str(e))
+async def bgjob_change_playing():
+    while True:
+        members_sum = 0
+        for s in client.servers:
+            members_sum += len(s.members)
+        presences_list = ["루냥아 도와줘 : 도움말" , "루냥아 업데이트내역 : 업데이트 내역 보기", str(len(client.servers)) + "개의 서버에서 귀여움받는 중", str(members_sum) + "명의 유저들에게 귀여움받는 중", "v" + bot_ver, "이 메시지는 10초 마다 바뀌어요!"]
+        for v in presences_list:
+            await asyncio.sleep(10)
+            await client.change_presence(game=discord.Game(name=v))
 
 @client.event
 async def say(message, text):
@@ -50,6 +54,7 @@ async def on_ready():
     m_log.info('name    : ' + str(client.user.name))
     m_log.info('id      : ' + str(client.user.id))
     m_log.info('version : ' + m_version.bot_ver)
+    client.loop.create_task(bgjob_change_playing())
 
 try:
     token = m_conf.BOT_TOKEN
