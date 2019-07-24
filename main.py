@@ -13,7 +13,7 @@ client = discord.Client()
 async def on_message(message):
     if message.content.startswith("루냥아"):
         # parsing command
-        message_t = content.replace("루냥아 ", '')
+        message_t = message.content.replace("루냥아 ", '')
         args = message_t.split(' ')
         cmd = args[0]
         params = args[1:]
